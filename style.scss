@@ -1,0 +1,58 @@
+@import 'node_modules/foundation-sites/scss/foundation';
+
+@include foundation-global-styles;
+@include foundation-grid;
+
+$regular-text-color: #393939;
+$section-background-color: whitesmoke;
+$section-border-color: solid 1px black;
+$box-background-color: #d8d8d8;
+$bottom-bar-background: white;
+
+body {
+    @include grid-row(12);
+    background-color: $bottom-bar-background;
+
+    #newsTitle {
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        border: $section-border-color;
+        background-color: $section-background-color;
+        @include grid-column(10);
+        @include grid-column-offset(1);
+        color: $box-background-color;
+
+        h1 {
+            font-weight: 400;
+            vertical-align: center;
+            margin-left: 10px;
+            color: $regular-text-color;
+        }
+    }
+
+    #leftSide {
+        @include grid-column-offset(1);
+        @include grid-column(3);
+        height: 400px;
+        background-color: $section-background-color;
+        border: $section-border-color
+    }
+
+    #rightSide {
+        @include grid-column(7);
+        height: 400px;
+        background-color: $section-background-color;
+        border: $section-border-color
+    }
+
+    #blankSpace {
+        @include grid-column(1);
+    }
+}
+
+    // #wholeShebang {
+    //     background-color: $bottom-bar-background;
+    //     @include grid-column(10);
+    //     @include grid-column-offset(1);
+    // }
