@@ -15,6 +15,7 @@ app.factory("NewsService", function ($http) {
     });
 
     console.log(newsArray);
+    
     return {
         getNews: function () {
             console.log(newsArray);
