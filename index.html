@@ -25,9 +25,15 @@
         </section>
 
         <section id="rightSide" ng-controller="DisplayController">
-            <ol>
-                
-            </ol>
+            <div class="newsBox" ng-repeat="element in news">
+                <div class="newsNugget">
+                    <h2>HEADLINE #{{ element.id + 1 }}: {{ element.title }}</h2>
+                    <p>---- {{ element.published }}</p>
+                </div>
+                <div class="bottomBar">
+                    
+                </div>
+            </div>
         </section>       
     </section>
    
