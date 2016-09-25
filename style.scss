@@ -79,7 +79,7 @@ body {
 
             .newsBox {
                 border: $section-border-color;
-                height: 250px;
+                min-height: 100px;
                 margin-top: 10px;
                 margin-bottom: 10px;
 
@@ -87,7 +87,8 @@ body {
                     width: 100%;
                     height: 85%;
                     background-color: $box-background-color;
-                    padding: 10px;
+                    padding: 10px 10px 15px 10px;
+                    border-bottom: 1px solid darkgray;
 
                     a {
                         margin: 0;
@@ -107,13 +108,19 @@ body {
                 }
 
                 .bottomBar {
+                    display: flex;
+                    justify-content: space-between;
                     width: 100%;
                     height: 15%;
                     background-color: $bottom-bar-background;
+                    padding: 5px;
 
-                    p {
-                        display: inline;
-                        margin: 0;
+                    .clickables {
+                        margin: 5px;
+
+                        input {
+                            font-size: 12px;
+                        }
                     }
                 }
             }

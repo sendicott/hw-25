@@ -21,21 +21,28 @@
         <section id="leftSide">
             <button class="selectionButtons" ng-click="removeHidden()">All</button>
             <button class="selectionButtons" ng-click="" id="favorites">Favorites</button>
-            <button class="selectionButtons" ng-click="">Bloomberg</button>
+            <button class="selectionButtons" ng-click="bloomFind()">Bloomberg</button>
             <button class="selectionButtons" ng-click="">New York Times</button>
             <button class="selectionButtons" ng-click="">Buzzfeed</button>
         </section>
 
         <section id="rightSide">
-            <div class="hidden newsBox" ng-repeat="element in news">
+            <div class="newsBox hidden" ng-repeat="element in news">
                 <div class="newsNugget">
                     <a href="{{ element.link }}" target="_blank">Headline #{{ element.id + 1 }}: {{ element.title }}</a>
                     <p>{{ element.publisher.name }} - published {{ element.published }}</p>
                     <p>{{ element.summary }}</p>
                 </div>
                 <div class="bottomBar">
-                    <p>Favorite</p>
-                    <p>Hide</p>
+                    <section class="clickables">
+                        <input type="radio" id="favoriteClick">
+                        <label for="favoriteClick">Favorite</label>
+                    </section>
+
+                    <section class="clickables">
+                        <input type="radio" ng-model="hider" value="hider" ng-change="hideIt(element)" id="hideClick">
+                        <label for="hideClick">Hide</label>
+                    </section>
                 </div>
             </div>
         </section>
