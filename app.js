@@ -18,11 +18,14 @@ app.factory("NewsService", function ($http) {
             return newsArray;
         },
 
-        getBloom: function () {
-
+        getCNN: function () {
+            let CNNArray = [];
             for (let i = 0; i < newsArray.length; i++) {
-                
+                if (newsArray[i].publisher.name === "CNN") {
+                    CNNArray.push(newsArray[i]);
+                }
             }
+            return CNNArray;
         }
     }
 });
@@ -30,29 +33,17 @@ app.factory("NewsService", function ($http) {
 app.controller("NewsController", function($scope, NewsService) {
     $scope.news = NewsService.getNews();
     $scope.removeHidden = function () {
-        let hiddenClass = document.querySelectorAll(".newsBox");
-        for (let i = 0; i < hiddenClass.length; i++) {
-            hiddenClass[i].classList.remove("hidden");    
-        }
+        $scope.news = null;
+        $scope.news = NewsService.getNews();
     }
 
-    $scope.bloomFind = function () {
-        let hiddenClass = document.querySelectorAll(".newsBox");
-        for (let i = 0; i < hiddenClass.length; i++) {
-            hiddenClass[i].classList.remove("hidden");    
-        }
-        
+    $scope.findCNN = function () {
+        $scope.news = null;
+        $scope.news = NewsService.getCNN();
     }
 
     $scope.hideIt = function () {
         console.log($scope);
         console.log($scope.news);
     }
-
-    // if (document.querySelectorAll("#hideClick").checked) {
-    //     console.log("checked");
-    // }
-    // let hideClickArray = document.querySelectorAll("#hideClick").checked;
-    // console.log(hideClickArray);
-
 });

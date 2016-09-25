@@ -21,13 +21,13 @@
         <section id="leftSide">
             <button class="selectionButtons" ng-click="removeHidden()">All</button>
             <button class="selectionButtons" ng-click="" id="favorites">Favorites</button>
-            <button class="selectionButtons" ng-click="bloomFind()">Bloomberg</button>
+            <button class="selectionButtons" ng-click="findCNN()">CNN</button>
             <button class="selectionButtons" ng-click="">New York Times</button>
             <button class="selectionButtons" ng-click="">Buzzfeed</button>
         </section>
 
         <section id="rightSide">
-            <div class="newsBox hidden" ng-repeat="element in news">
+            <div class="newsBox" ng-repeat="element in news">
                 <div class="newsNugget">
                     <a href="{{ element.link }}" target="_blank">Headline #{{ element.id + 1 }}: {{ element.title }}</a>
                     <p>{{ element.publisher.name }} - published {{ element.published }}</p>
