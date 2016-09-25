@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="NewsTrackerApp">
+
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
 </head>
 
-<body ng-app="NewsTrackerApp">
+<body ng-controller="NewsController">
     <section id="newsTitle">
         <i class="fa fa-stop fa-4x" aria-hidden="true"></i>
         <h1>Newsboy: Platinum Edition</h1>
     </section>
 
     <section id="secondRow">
-        <section id="leftSide" ng-controller="ButtonController">
-            <button class="selectionButtons" ng-click="">All</button>
-            <button id="favorites" class="selectionButtons" ng-click="">Favorites</button>
+
+        <section id="leftSide">
+            <button class="selectionButtons" ng-click="removeHidden()">All</button>
+            <button class="selectionButtons" ng-click="" id="favorites">Favorites</button>
             <button class="selectionButtons" ng-click="">Bloomberg</button>
             <button class="selectionButtons" ng-click="">New York Times</button>
             <button class="selectionButtons" ng-click="">Buzzfeed</button>
-
         </section>
 
-        <section id="rightSide" ng-controller="DisplayController">
-            <div class="newsBox" ng-repeat="element in news">
+        <section id="rightSide">
+            <div class="hidden newsBox" ng-repeat="element in news">
                 <div class="newsNugget">
-                    <h2>HEADLINE #{{ element.id + 1 }}: {{ element.title }}</h2>
-                    <p>---- {{ element.published }}</p>
+                    <a href="{{ element.link }}" target="_blank">Headline #{{ element.id + 1 }}: {{ element.title }}</a>
+                    <p>{{ element.publisher.name }} - published {{ element.published }}</p>
+                    <p>{{ element.summary }}</p>
                 </div>
                 <div class="bottomBar">
-                    
+                    <p>Favorite</p>
+                    <p>Hide</p>
                 </div>
             </div>
-        </section>       
+        </section>
+
     </section>
-   
+
 </body>
+
 </html>

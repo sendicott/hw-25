@@ -2,12 +2,14 @@ let app = angular.module('NewsTrackerApp', []);
 
 app.factory("NewsService", function ($http) {
     let newsArray = [];
+    let favorites = [];
 
     $http({
         method: 'GET',
         url: "http://puzzlegram.herokuapp.com/news",
     }).then(function (news) {
         angular.copy(news.data.news, newsArray);
+        console.log("Testing: " + newsArray[0].published);
     });
 
     return {
@@ -18,10 +20,11 @@ app.factory("NewsService", function ($http) {
     }
 });
 
-app.controller("ButtonController", function($scope) {
-
-});
-
-app.controller("DisplayController", function($scope, NewsService) {
+app.controller("NewsController", function($scope, NewsService) {
     $scope.news = NewsService.getNews();
+    $scope.removeHidden = function () {
+        console.log("hidden");
+        let hiddenClass = document.querySelectorAll(".newsBox").classList
+        hiddenClass.remove("hidden");
+    }
 });
