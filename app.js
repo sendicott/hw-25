@@ -2,7 +2,6 @@ let app = angular.module('NewsTrackerApp', []);
 
 app.factory("NewsService", function ($http) {
     let newsArray = [];
-    let favorites = [];
 
     $http({
         method: 'GET',
@@ -14,7 +13,6 @@ app.factory("NewsService", function ($http) {
 
     return {
         getNews: function () {
-            // console.log(newsArray);
             return newsArray;
         },
 
@@ -26,11 +24,42 @@ app.factory("NewsService", function ($http) {
                 }
             }
             return CNNArray;
-        }
+        },
+
+        getBBC: function () {
+            let BBCArray = [];
+            for (let i = 0; i < newsArray.length; i++) {
+                if (newsArray[i].publisher.name === "BBC") {
+                    BBCArray.push(newsArray[i]);
+                }
+            }
+            return BBCArray;
+        },
+
+        getNYT: function () {
+            let NYTArray = [];
+            for (let i = 0; i < newsArray.length; i++) {
+                if (newsArray[i].publisher.name === "New York Times") {
+                    NYTArray.push(newsArray[i]);
+                }
+            }
+            return NYTArray;
+        },
+
+        getBuzz: function () {
+            let BuzzArray = [];
+            for (let i = 0; i < newsArray.length; i++) {
+                if (newsArray[i].publisher.name === "Buzzfeed") {
+                    BuzzArray.push(newsArray[i]);
+                }
+            }
+            return BuzzArray;
+        },
     }
 });
 
 app.controller("NewsController", function($scope, NewsService) {
+    let favoriteArray = [];
     $scope.news = NewsService.getNews();
     $scope.removeHidden = function () {
         $scope.news = null;
@@ -42,8 +71,28 @@ app.controller("NewsController", function($scope, NewsService) {
         $scope.news = NewsService.getCNN();
     }
 
-    $scope.hideIt = function () {
-        console.log($scope);
-        console.log($scope.news);
+    $scope.findBBC = function () {
+        $scope.news = null;
+        $scope.news = NewsService.getBBC();
     }
+
+    $scope.findNYT = function () {
+        $scope.news = null;
+        $scope.news = NewsService.getNYT();
+    }
+
+    $scope.findBuzz = function () {
+        $scope.news = null;
+        $scope.news = NewsService.getBuzz();
+    }
+
+    $scope.makeFavorite = function (element) {
+        favoriteArray.push(element);
+    }
+
+    $scope.findFavorites = function () {
+        $scope.news = null;
+        $scope.news = favoriteArray;
+    }
+
 });

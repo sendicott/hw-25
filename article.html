@@ -1,0 +1,18 @@
+<div class="newsBox">
+    <div class="newsNugget">
+        <a href="{{ $ctrl.readable.link }}" target="_blank">Headline #{{ $ctrl.readable.id + 1 }}: {{ $ctrl.readable.title }}</a>
+        <p>{{ $ctrl.readable.publisher.name }} - published {{ $ctrl.readable.published }}</p>
+        <p>{{ $ctrl.readable.summary }}</p>
+    </div>
+    <div class="bottomBar">
+        <section class="clickables">
+            <input type="radio" id="favoriteClick">
+            <label for="favoriteClick">Favorite</label>
+        </section>
+
+        <section class="clickables">
+            <input type="radio" ng-model="hider" value="hider" ng-change="hideIt($ctrl.readable)" id="hideClick">
+            <label for="hideClick">Hide</label>
+        </section>
+    </div>
+</div>

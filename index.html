@@ -20,31 +20,31 @@
 
         <section id="leftSide">
             <button class="selectionButtons" ng-click="removeHidden()">All</button>
-            <button class="selectionButtons" ng-click="" id="favorites">Favorites</button>
+            <button class="selectionButtons" ng-click="findFavorites()" id="favorites">Favorites</button>
             <button class="selectionButtons" ng-click="findCNN()">CNN</button>
-            <button class="selectionButtons" ng-click="">New York Times</button>
-            <button class="selectionButtons" ng-click="">Buzzfeed</button>
+            <button class="selectionButtons" ng-click="findBBC()">BBC</button>
+            <button class="selectionButtons" ng-click="findNYT()">New York Times</button>
+            <button class="selectionButtons" ng-click="findBuzz()">Buzzfeed</button>
         </section>
 
         <section id="rightSide">
             <div class="newsBox" ng-repeat="element in news">
+
                 <div class="newsNugget">
                     <a href="{{ element.link }}" target="_blank">Headline #{{ element.id + 1 }}: {{ element.title }}</a>
                     <p>{{ element.publisher.name }} - published {{ element.published }}</p>
                     <p>{{ element.summary }}</p>
                 </div>
-                <div class="bottomBar">
-                    <section class="clickables">
-                        <input type="radio" id="favoriteClick">
-                        <label for="favoriteClick">Favorite</label>
-                    </section>
 
-                    <section class="clickables">
-                        <input type="radio" ng-model="hider" value="hider" ng-change="hideIt(element)" id="hideClick">
-                        <label for="hideClick">Hide</label>
-                    </section>
+                <div class="bottomBar">
+                    <button class="clickables" ng-click="makeFavorite(element)">Favorite</button>
+                    <button class="clickables" ng-click="">Hide</button>
                 </div>
+
             </div>
+
+            <!--<div class="newsBox" ng-repeat="element in news" readable="element"></div>-->
+
         </section>
 
     </section>
