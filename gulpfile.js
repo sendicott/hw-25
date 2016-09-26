@@ -7,7 +7,7 @@ let sass = require('gulp-sass');
 gulp.task('default', ['html', 'css', 'js']);
 
 gulp.task('html', function () {
-    return gulp.src('index.html')
+    return gulp.src('*.html')
         .pipe(gulp.dest('public/'));
 });
 

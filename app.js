@@ -1,5 +1,14 @@
 let app = angular.module('NewsTrackerApp', []);
 
+app.component("story", {
+    templateUrl: "article.html",
+    bindings: {
+        readable: "<",
+    },
+    controller: "NewsArticle", 
+});
+
+
 app.factory("NewsService", function ($http) {
     let newsArray = [];
 
@@ -8,7 +17,9 @@ app.factory("NewsService", function ($http) {
         url: "http://puzzlegram.herokuapp.com/news",
     }).then(function (news) {
         angular.copy(news.data.news, newsArray);
-        // console.log("Testing: " + newsArray[0].published);
+        for (let i = 0; i < newsArray.length; i++) {
+            newsArray[i].favorite = false;
+        }
     });
 
     return {
@@ -55,54 +66,20 @@ app.factory("NewsService", function ($http) {
             }
             return BuzzArray;
         },
+
+        getFavorites: function () {
+            let favoriteArray = [];
+            for (let i = 0; i < newsArray.length; i++) {
+                if (newsArray[i].favorite === true) {
+                    favoriteArray.push(newsArray[i]);
+                }
+            }
+            return favoriteArray;
+        }
     }
 });
 
-app.controller("NewsController", function($scope, NewsService) {
-    let favoriteArray = [];
-    // let oldList = NewsService.getNews();
-    // let newList = [];
-    // for (let i = 0; i < oldList.length; i++) {
-    //     newList.push(oldList[i]);
-    // }
-    // console.log("old: " + NewsService.getNews());
-    // console.log("new: " + newList);
-
-    $scope.news = NewsService.getNews();
-    $scope.removeHidden = function () {
-        $scope.news = null;
-        $scope.news = NewsService.getNews();
-    }
-
-    $scope.findCNN = function () {
-        $scope.news = null;
-        $scope.news = NewsService.getCNN();
-    }
-
-    $scope.findBBC = function () {
-        $scope.news = null;
-        $scope.news = NewsService.getBBC();
-    }
-
-    $scope.findNYT = function () {
-        $scope.news = null;
-        $scope.news = NewsService.getNYT();
-    }
-
-    $scope.findBuzz = function () {
-        $scope.news = null;
-        $scope.news = NewsService.getBuzz();
-    }
-
-    $scope.makeFavorite = function (element) {
-        favoriteArray.push(element);
-    }
-
-    $scope.findFavorites = function () {
-        $scope.news = null;
-        $scope.news = favoriteArray;
-    }
-
+app.controller("NewsArticle", function($scope, NewsService) {
     $scope.hideArticle = function (element) {
         $scope.news = null;
         let articlesList = NewsService.getNews();
@@ -114,5 +91,46 @@ app.controller("NewsController", function($scope, NewsService) {
         }
         $scope.news = articlesList;
     }
+});
 
+app.controller("NewsController", function($scope, NewsService) {    
+    $scope.activeTab = "";
+
+    $scope.news = NewsService.getNews();
+
+    $scope.removeHidden = function () {
+        $scope.activeTab = "all";
+        $scope.news = null;
+        $scope.news = NewsService.getNews();
+    }
+
+    $scope.findFavorites = function () {
+        $scope.activeTab = "fave";
+        $scope.news = null;
+        $scope.news = NewsService.getFavorites();
+    }
+
+    $scope.findCNN = function () {
+        $scope.activeTab = "CNN";
+        $scope.news = null;
+        $scope.news = NewsService.getCNN();
+    }
+
+    $scope.findBBC = function () {
+        $scope.activeTab = "BBC";
+        $scope.news = null;
+        $scope.news = NewsService.getBBC();
+    }
+
+    $scope.findNYT = function () {
+        $scope.activeTab = "NYT";
+        $scope.news = null;
+        $scope.news = NewsService.getNYT();
+    }
+
+    $scope.findBuzz = function () {
+        $scope.activeTab = "Buzz";
+        $scope.news = null;
+        $scope.news = NewsService.getBuzz();
+    }
 });

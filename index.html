@@ -3,6 +3,7 @@
 <html ng-app="NewsTrackerApp">
 
 <head>
+    <title>Scott's News Feed</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -19,36 +20,16 @@
     <section id="secondRow">
 
         <section id="leftSide">
-            <button class="selectionButtons" ng-click="removeHidden()">All</button>
-            <button class="selectionButtons" ng-click="findFavorites()" id="favorites">Favorites</button>
-            <button class="selectionButtons" ng-click="findCNN()">CNN</button>
-            <button class="selectionButtons" ng-click="findBBC()">BBC</button>
-            <button class="selectionButtons" ng-click="findNYT()">New York Times</button>
-            <button class="selectionButtons" ng-click="findBuzz()">Buzzfeed</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'all') ? 'active': ''" ng-click="removeHidden()">All</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'fave') ? 'active': ''" ng-click="findFavorites()" id="favorites">Favorites</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'CNN') ? 'active': ''" ng-click="findCNN()">CNN</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'BBC') ? 'active': ''" ng-click="findBBC()">BBC</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'NYT') ? 'active': ''" ng-click="findNYT()">New York Times</button>
+            <button class="selectionButtons" ng-class="(activeTab === 'Buzz') ? 'active': ''" ng-click="findBuzz()">Buzzfeed</button>
         </section>
-
         <section id="rightSide">
-            <div class="newsBox" ng-repeat="element in news">
-
-                <div class="newsNugget">
-                    <a href="{{ element.link }}" target="_blank">Headline #{{ element.id + 1 }}: {{ element.title }}</a>
-                    <p>{{ element.publisher.name }} - published {{ element.published }}</p>
-                    <p>{{ element.summary }}</p>
-                </div>
-
-                <div class="bottomBar">
-                    <button class="clickables" ng-click="makeFavorite(element)">Favorite</button>
-                    <button class="clickables" ng-click="hideArticle(element)">Hide</button>
-                </div>
-
-            </div>
-
-            <!--<div class="newsBox" ng-repeat="element in news" readable="element"></div>-->
-
+            <story class="newsBox" ng-class="(element.favorite === true) ? 'highlight' : ''" ng-repeat="element in news" readable="element"></story>
         </section>
-
     </section>
-
 </body>
-
 </html>

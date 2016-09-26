@@ -55,6 +55,10 @@ body {
                 font-size: 23px;
                 font-weight: $headline-font-weight;
 
+                &.active {
+                    background-color: yellow;
+                }
+
                 &:hover {
                     background-color: yellow;
                 }
@@ -73,11 +77,16 @@ body {
             border: $section-border-color;
             overflow-y: auto;
 
+            .highlight {
+                opacity: 0.5;
+            }
+
             .newsBox {
                 border: $section-border-color;
                 min-height: 100px;
                 margin-top: 10px;
                 margin-bottom: 10px;
+                display: block;
 
                 .newsNugget {
                     width: 100%;
