@@ -60,6 +60,14 @@ app.factory("NewsService", function ($http) {
 
 app.controller("NewsController", function($scope, NewsService) {
     let favoriteArray = [];
+    // let oldList = NewsService.getNews();
+    // let newList = [];
+    // for (let i = 0; i < oldList.length; i++) {
+    //     newList.push(oldList[i]);
+    // }
+    // console.log("old: " + NewsService.getNews());
+    // console.log("new: " + newList);
+
     $scope.news = NewsService.getNews();
     $scope.removeHidden = function () {
         $scope.news = null;
@@ -93,6 +101,18 @@ app.controller("NewsController", function($scope, NewsService) {
     $scope.findFavorites = function () {
         $scope.news = null;
         $scope.news = favoriteArray;
+    }
+
+    $scope.hideArticle = function (element) {
+        $scope.news = null;
+        let articlesList = NewsService.getNews();
+
+        for (let i = 0; i < articlesList.length; i++) {
+            if (articlesList[i].id === element.id) {
+                articlesList.splice(i, 1);
+            }
+        }
+        $scope.news = articlesList;
     }
 
 });
